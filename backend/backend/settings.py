@@ -125,8 +125,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'  
+
+MEDIA_URL="/product/images/"
+
 #below line is to make backend know about "static" folder just like we did with "base"
-STATICFILES_DIR=[BASE_DIR/'static']
+STATICFILES_DIRS=[BASE_DIR/'static']
 MEDIA_ROOT='static/images'
+
+
 CORS_ALLOW_ALL_ORIGINS=True
