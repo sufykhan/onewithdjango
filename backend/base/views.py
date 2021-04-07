@@ -17,6 +17,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['name'] = user.username
         return token
+    def validate(self,user):
+        data=super().validate(user)
+        data["username"]=self.user.username
+        data["email"]=self.user.email
+        return data
+
 #This is for returning extra information decoded in the token
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
