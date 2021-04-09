@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
+
+from rest_framework.permissions import IsAuthenticated,IsAdminUser
 
 from rest_framework.response import Response
 
@@ -35,6 +37,7 @@ def getRoutes(request):
     return Response({"message":"high"})
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getUserProfile(request):
     user=request.user
     serializer=UserSerializer(user,many=False)
