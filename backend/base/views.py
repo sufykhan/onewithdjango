@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import Product
-from .serializer import ProductSerializer,UserSerializer
+from .serializer import ProductSerializer,UserSerializer,UserSerializerWithToken
 from .productsData import products
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -20,8 +20,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     #self works as serializer (converting json-->dict (maybe))    
     def validate(self,user):
         data=super().validate(user)
-        data["username"]=self.user.username
-        data["email"]=self.user.email
+        
+        serializer=UserSerializerWithToken(self.user).data
+        for k,v in serializer.items():
+            data[k]=v
         return data
 
 #This is for returning extra information decoded in the token
