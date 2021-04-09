@@ -9,5 +9,6 @@ urlpatterns=[
     path("",views.getRoutes,name="routes"),
     path("products",views.getProducts,name="products"),
     path("products/<str:pk>/",views.getProduct,name="product"),
-    path("user/profile",views.getUserProfile,name="user-profile")
+    path("user/profile",views.getUserProfile,name="user-profile"),
+    path("allusers",views.getUsers,name="users")
 ]
